@@ -47,18 +47,19 @@ local ammupos = {
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        local timeW = 2000
         for k, v in pairs(ammupos) do
-
             local plyCoords = GetEntityCoords(GetPlayerPed(-1), false)
             local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, ammupos[k].x, ammupos[k].y, ammupos[k].z)
 
             if dist <= 2.0 then
+                timeW = 0
                 JWORK.ShowHelpNotification("Appuyez sur ~INPUT_TALK~ pour ~b~interagir avec l'ammu~w~.")
                 if IsControlJustPressed(1, 51) then
                     CreateMenu(Ammu)
                 end
             end
         end
+        Wait(timeW)
     end
 end)
